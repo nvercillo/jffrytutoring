@@ -169,7 +169,6 @@ void initLinkedList(linked_list * ll){
     sentence_node * first_sentence = NULL;
     sentence_node *  prev_sentence = NULL;
     int max_limit =100;
-
     
     while(max_limit-- >0){
         lineNum ++;
