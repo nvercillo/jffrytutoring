@@ -9,6 +9,12 @@
 #define DEFINITIONS_H_INCLUDED
 
 
+typedef struct 
+{
+    int sentence_pos; 
+    int word_pos;
+} word_position;
+
 typedef struct word_node_t
 {
     char *charPtr;
@@ -28,8 +34,7 @@ typedef struct sentence_node_t
 
 
 typedef struct{
-    sentence_node * first;
-    sentence_node * last;
+    sentence_node * head;
     int count;
     bool initialized;
 } linked_list;
