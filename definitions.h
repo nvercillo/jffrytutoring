@@ -35,7 +35,7 @@ typedef struct sentence_node_t
 
 typedef struct{
     sentence_node * head;
-    int count;
+    int size;
     bool initialized;
 } linked_list;
 

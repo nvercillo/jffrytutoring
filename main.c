@@ -16,7 +16,8 @@ int main(){
     ll = malloc(sizeof(linked_list));
     initLinkedList(ll);
     searchContinuously(ll);
-    printList(ll);
+    deleteContinuously(ll);
+    free(ll);
 
 
 
