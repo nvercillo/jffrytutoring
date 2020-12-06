@@ -8,44 +8,21 @@
 #ifndef DEFINITIONS_H_INCLUDED
 #define DEFINITIONS_H_INCLUDED
 
-
-typedef struct 
-{
-    int sentence_pos; 
-    int word_pos;
-} word_position;
-
-typedef struct word_node_t
-{
-    char *charPtr;
-    int size;
-    int position;
-    struct word_node_t * next;
-
-}word_node;
-
-typedef struct sentence_node_t
-{
-    word_node *wordPtr;
-    int whichLine;
-    int numOfWords;
-    struct sentence_node_t * next;
-}sentence_node;
-
-
 typedef struct{
-    sentence_node * head;
+    void * head;
+    void * tail;
     int size;
-    bool initialized;
 } linked_list;
 
 
-
-void linked_list_add(linked_list * ll, sentence_node * sent){ // add a new sentence to the linked list
-    if (!ll->initialized){ // add the first node
-
-    } else { // any subsequent node
-
+void linked_list_add(linked_list * ll, void * node){ // add a new sentence to the linked list
+    ll->size ++;
+    if (ll->size ==0){ // add the first node
+        ll->head = node;
+        ll->tail = node;
+    } else {
+        ll->tail->next = node;
+        ll->tail - node;
     }
 }
 

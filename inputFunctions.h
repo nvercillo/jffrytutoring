@@ -18,6 +18,7 @@ void deleteContinuously(linked_list * ll){
         printf("\nEnter a line to delete: ");
         gets(inputStr);
         int i;
+
         sscanf(inputStr, "%d", &i);
         if (!deleteSentence(ll, i))
             printf("Unable to delete line number: %d\n", i);
@@ -36,24 +37,22 @@ void deallocSentence(sentence_node * sn){
     }
     free(sn);
 }
-bool deleteSentence(linked_list * ll, int line_num ){  // True -> success 
 
+
+bool deleteNode(linked_list * ll, int pos ){  // True -> success 
     printf("Delete Node %d\n", line_num);
 
-    
-    if ( line_num > ll->size  || line_num < 1 ){
+    if ( pos > ll->size  || pos < 1 ){
         // printf("Endterewer werwer er");
         return false;    
     } 
 
-    // return true;
-    sentence_node * head = ll->head;
-    sentence_node * prev =NULL;
+    void  * head = ll->head;
+    void * prev =NULL;
 
     if (ll->size ==1){
         //delete first node()
-        // printf("line removed \n");
-        deallocSentence(ll->head);
+        deallocNode(ll->head);
         ll->head = NULL;
         ll->size--;
         return true;
@@ -61,34 +60,33 @@ bool deleteSentence(linked_list * ll, int line_num ){  // True -> success
 
     if (line_num ==1){
         // printf("1 111 1 1 1" );
-        sentence_node * to_delete = head;
+        void * to_delete = head;
         head = head->next;
         ll->head = head;
         ll->size --;
-        deallocSentence(to_delete);
+        deallocNode(to_delete);
         printList(ll);
         return true;
         
     }
 
     --ll->size;
-    for (int i=0; i<line_num-1; i++){
-
+    for (int i=0; i<pos-1; i++){
         prev = head;
         head = head->next;
     }
     
 
-    if (prev != NULL ){   // occurs when deleting line 1;
+    if (prev != NULL ){  
         sentence_node * to_delete = prev->next;
         if (head !=NULL)
             prev->next = head->next;
 
-        deallocSentence(to_delete);
+        deallocNode(to_delete);
     }
 
 
-    for (int i = line_num; i < ll->size +1; i++){
+    for (int i = pos; i < ll->size +1; i++){
         head->whichLine --;
         head = head->next;
     }
@@ -96,29 +94,28 @@ bool deleteSentence(linked_list * ll, int line_num ){  // True -> success
     return true;
 }
 
-void printList(linked_list * ll ){
-    sentence_node * sn = ll->head;
+// void printList(linked_list * ll ){
+//     sentence_node * sn = ll->head;
 
-    printf("\nThis is all the words printed out one line at a time: \n");
-    if (ll->head == NULL){
-        
-        return;
-    }
-    while(sn != NULL){
-        printSentence(sn);
-        printf("\n");
-        sn = sn->next;
-    }
-}
+//     printf("\nThis is all the words printed out one line at a time: \n");
+//     if (ll->head == NULL){
+//         return;
+//     }
+//     while(sn != NULL){
+//         printSentence(sn);
+//         printf("\n");
+//         sn = sn->next;
+//     }
+// }
 
-void printSentence(sentence_node * sn){
-    word_node * wn = sn->wordPtr;
-    while(wn != NULL){
-        printf(wn->charPtr );
-        printf(" ");
-        wn = wn->next;
-    }
-} 
+// void printSentence(sentence_node * sn){
+//     word_node * wn = sn->wordPtr;
+//     while(wn != NULL){
+//         printf(wn->charPtr );
+//         printf(" ");
+//         wn = wn->next;
+//     }
+// } 
 
 int  stringParser( char *inputStr, char ***w_array) {
     int size = 0;
@@ -201,6 +198,15 @@ word_position * searchWord(linked_list * ll, char *toSearch){
     }
     return NULL;
 }
+
+
+void addToLinkedList(listed_list * ll){
+
+
+
+}
+
+
 
 void initLinkedList(linked_list * ll){
 
